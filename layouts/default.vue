@@ -69,10 +69,10 @@
         fill-height
         class="grey lighten-4">
         <v-layout
-          justify-center 
+          justify-center
           align-center>
           <v-flex shrink>
-            test
+            <nuxt/>
           </v-flex>
         </v-layout>
       </v-container>
