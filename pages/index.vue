@@ -36,15 +36,28 @@ export default {
   },
   created: function() {
     firebase.auth().onAuthStateChanged(user => {
-      console.log(user)
       if (user) {
         this.isLogin = true
         this.userData = user
+        writeUserData(user)
       } else {
         this.isLogin = false
         this.userData = null
       }
     })
   }
+}
+function writeUserData(user) {
+  console.log(user.uid)
+  const firestore = firebase.firestore()
+  const settings = { timestampsInSnapshots: true }
+  firestore.settings(settings)
+  firestore
+    .collection('users')
+    .add({ email: user.email })
+    .then(function(docRef) {
+      console.log('Document written with ID: ', docRef.id)
+    })
+  console.log('test')
 }
 </script>
