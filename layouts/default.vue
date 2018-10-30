@@ -79,7 +79,6 @@
 </template>
 
 <script>
-
 import Login from '~/components/Login.vue'
 import Logout from '~/components/Logout.vue'
 import firebase from '@/plugins/firebase'
@@ -95,13 +94,12 @@ export default {
       { divider: true },
       { heading: 'Periods' },
       { text: 'Create new label' }
-    ]
+    ],
+    isLogin: false,
+    userData: null
   }),
   asyncData() {
-    return {
-      isLogin: false,
-      userData: null
-    }
+    return {}
   },
   created: function() {
     firebase.auth().onAuthStateChanged(user => {
