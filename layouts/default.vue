@@ -55,6 +55,11 @@
       <v-toolbar-side-icon @click.native="drawer = !drawer"/>
       <span class="title ml-3 mr-5">Hoteison</span>
       <v-spacer/>
+      <Login
+        v-if="!isLogin"/>
+      <Logout
+        v-if="isLogin"
+        :user="userData" />
     </v-toolbar>
     <v-content>
       <v-container
@@ -74,7 +79,16 @@
 </template>
 
 <script>
+
+import Login from '~/components/Login.vue'
+import Logout from '~/components/Logout.vue'
+import firebase from '@/plugins/firebase'
+
 export default {
+  components: {
+    Login,
+    Logout
+  },
   data: () => ({
     drawer: null,
     items: [
@@ -83,11 +97,43 @@ export default {
       { text: 'Create new label' }
     ]
   }),
+  asyncData() {
+    return {
+      isLogin: false,
+      userData: null
+    }
+  },
+  created: function() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.isLogin = true
+        this.userData = user
+        writeUserData(user)
+      } else {
+        this.isLogin = false
+        this.userData = null
+      }
+    })
+  },
   methods: {
     test() {
       alert('hoge')
     }
   }
+}
+function writeUserData(user) {
+  console.log(user.uid)
+  const firestore = firebase.firestore()
+  const settings = { timestampsInSnapshots: true }
+  firestore.settings(settings)
+  firestore
+    .collection('users')
+    .doc(user.uid)
+    .set({ email: user.email })
+    .then(function(docRef) {
+      console.log('complete')
+    })
+  console.log('test')
 }
 </script>
 

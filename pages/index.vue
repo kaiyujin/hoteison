@@ -8,11 +8,7 @@
       sm8
       md6>
       <div class="text-xs-center">
-        <Login
-          v-if="!isLogin"/>
-        <Logout
-          v-if="isLogin"
-          :user="userData" />
+
       </div>
     </v-flex>
   </v-layout>
