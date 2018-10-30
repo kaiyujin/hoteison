@@ -23,13 +23,6 @@
                 {{ item.heading }}
               </v-subheader>
             </v-flex>
-            <v-flex
-              xs6
-              class="text-xs-right">
-              <v-btn
-                small
-                flat>edit</v-btn>
-            </v-flex>
           </v-layout>
           <v-divider
             v-else-if="item.divider"
@@ -40,7 +33,7 @@
           <v-list-tile
             v-else
             :key="i"
-            @click="alert('test')"
+            @click="test"
           >
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -85,22 +78,16 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { icon: 'lightbulb_outline', text: 'Notes' },
-      { icon: 'touch_app', text: 'Reminders' },
       { divider: true },
-      { heading: 'Labels' },
-      { icon: 'add', text: 'Create new label' },
-      { divider: true },
-      { icon: 'archive', text: 'Archive' },
-      { icon: 'delete', text: 'Trash' },
-      { divider: true },
-      { icon: 'settings', text: 'Settings' },
-      { icon: 'chat_bubble', text: 'Trash' },
-      { icon: 'help', text: 'Help' },
-      { icon: 'phonelink', text: 'App downloads' },
-      { icon: 'keyboard', text: 'Keyboard shortcuts' }
+      { heading: 'Periods' },
+      { text: 'Create new label' }
     ]
-  })
+  }),
+  methods: {
+    test() {
+      alert('hoge')
+    }
+  }
 }
 </script>
 

@@ -54,9 +54,10 @@ function writeUserData(user) {
   firestore.settings(settings)
   firestore
     .collection('users')
-    .add({ email: user.email })
+    .doc(user.uid)
+    .set({ email: user.email })
     .then(function(docRef) {
-      console.log('Document written with ID: ', docRef.id)
+      console.log('complete')
     })
   console.log('test')
 }
